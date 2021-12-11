@@ -2,7 +2,7 @@
 
 InstaUnfollow é um BOT para analisar os perfis que não seguem de volta na sua conta do Instagram utilizando a ferramenta [Instaloader](https://github.com/instaloader/instaloader).
 
-## Instalação
+## Installation
 
 Use o gerenciador de pacotes [pip](https://pip.pypa.io/en/stable/) para instalar as ferramentas:
 
@@ -28,7 +28,17 @@ def main() -> None:
 ...
 ```
 
-## Contribuição
+## Comandos do BOT
+[/start]() --> Responde uma saudação e informa o próximo comando para iniciar outras funções.
+
+[/nao_seguidores]() --> Responde uma lista de perfis que não seguem de volta.
+
+[/notificar]() --> Ativa as notificações quando alguém deixa de seguir (Vários acessos podem sobrecarregar a API de requisições)
+
+[/desativar]() --> Desativa as notificações.
+
+
+## Contributing
 Requisições Pull são bem vindas.
 
 ## License
