@@ -66,7 +66,7 @@ def monitorarseg(chat_id): #Função retorna os perfis que deixaram de seguir
         user_profiles[chat_id][2] = base_perfis_atualizada
     else:
         user_profiles[chat_id][2] = nao_seguem(chat_id)
-    print(base_perfis_nova)
+        
     return base_perfis_nova
 
 
@@ -177,8 +177,6 @@ def senha(update: Update, context: CallbackContext) -> int:
         update.message.reply_text('Erro de conexão, tente novamente usando o comando /login')
     except instaloader.exceptions.InvalidArgumentException:
         update.messsage.reply_text('Erro, caracteres invalidos!')
-
-    print(user_profiles)
 
     return ConversationHandler.END
 
