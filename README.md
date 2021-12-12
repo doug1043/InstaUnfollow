@@ -29,13 +29,13 @@ def main() -> None:
 ```
 
 ## Comandos do BOT
-[/start](#) --> Responde uma saudação e informa o próximo comando para iniciar outras funções.
+[/start](#) --> Apresenta o BOT e informações sobre os principais comandos.
 
-[/buscar_nao_seguidores](#) --> Responde uma lista de perfis que não seguem de volta.
+[/buscar_nao_seguidores](#) --> BOT responde uma lista de perfis que não seguem de volta o usuário logado.
 
-[/notificar](#) --> Ativa as notificações quando alguém deixa de seguir (Vários acessos podem sobrecarregar a API de requisições)
+[/notificar](#) --> Ativa avisos quando algum seguidor deixa de seguir o  usuário logado (Vários acessos podem sobrecarregar a API de requisições)
 
-[/desativar](#) --> Desativa as notificações.
+[/desativar](#) --> Desativa os avisos.
 
 
 ## Contribuições
