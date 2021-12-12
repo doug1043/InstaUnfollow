@@ -1,6 +1,6 @@
 import instaloader
 
-BOT_TOKEN = "5092523690:AAEbg_vnj_buFJkxr140dMQ4_RVc7NisBK8"
+BOT_TOKEN = "YOUR_BOT_TOKEN"
 
 USER, PASS = range(2)
 
