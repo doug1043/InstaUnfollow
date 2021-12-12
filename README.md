@@ -1,6 +1,6 @@
 # InstaUnfollow Telegram BOT
 
-InstaUnfollow é um BOT para analisar os perfis que não seguem de volta na sua conta do Instagram utilizando a ferramenta [Instaloader](https://github.com/instaloader/instaloader).
+InstaUnfollow é um BOT para analisar os perfis que não te seguem de volta em sua conta do Instagram utilizando a ferramenta [Instaloader](https://github.com/instaloader/instaloader).
 
 ## Instalação
 
