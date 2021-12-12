@@ -31,7 +31,7 @@ def main() -> None:
 ## Comandos do BOT
 [/start](#) --> Responde uma saudação e informa o próximo comando para iniciar outras funções.
 
-[/nao_seguidores](#) --> Responde uma lista de perfis que não seguem de volta.
+[/buscar_nao_seguidores](#) --> Responde uma lista de perfis que não seguem de volta.
 
 [/notificar](#) --> Ativa as notificações quando alguém deixa de seguir (Vários acessos podem sobrecarregar a API de requisições)
 
