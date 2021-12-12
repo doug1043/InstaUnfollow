@@ -37,6 +37,8 @@ def main() -> None:
 
 [/desativar](#) --> Desativa os avisos.
 
+[/sair](#) --> Sai da conta.
+
 
 ## Contribuições
 Requisições Pull são bem vindas.
