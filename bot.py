@@ -49,33 +49,6 @@ def update_followers(chat_id):
     return new_nonfollowers_base
 
 
-def notify_nonfollowers(context: CallbackContext) -> None:
-    due_time = 3600 #tempo em segundos
-    chat_id = context.job
-    profile_unfollowed = update_followers(chat_id)
-
-    if len(profile_unfollowed) == 0:
-        context.job_queue.run_once(notify_nonfollowers, due_time, context=chat_id, name=str(chat_id))
-    else:
-        for profile in profile_unfollowed:
-            context.bot.send_message(chat_id, text="Alguém deixou de te seguir!",
-                reply_markup=InlineKeyboardMarkup([
-                    [InlineKeyboardButton(text='@{}'.format(profile), url='https://instagram.com/{}'.format(profile))]
-                ])
-            )
-
-        context.job_queue.run_once(notify_nonfollowers, due_time, context=chat_id, name=str(chat_id))
-
-
-def remove_job_notify_if_exists(name: str, context: CallbackContext) -> bool:
-    current_jobs = context.job_queue.get_jobs_by_name(name)
-    if not current_jobs:
-        return False
-    for job in current_jobs:
-        job.schedule_removal()
-    return True
-
-
 def start(update: Update, context: CallbackContext) -> None:
     chat_id = update.message.chat_id 
     user_profiles[chat_id] = []
@@ -109,11 +82,38 @@ def activate_notifications(update: Update, context: CallbackContext) -> None:
         update.message.reply_text('Irei notificar quando alguém deixar de seguir seu perfil :D')
 
 
+def notify_nonfollowers(context: CallbackContext) -> None:
+    due_time = 3600 #tempo em segundos
+    chat_id = context.job
+    profile_unfollowed = update_followers(chat_id)
+
+    if len(profile_unfollowed) == 0:
+        context.job_queue.run_once(notify_nonfollowers, due_time, context=chat_id, name=str(chat_id))
+    else:
+        for profile in profile_unfollowed:
+            context.bot.send_message(chat_id, text="Alguém deixou de te seguir!",
+                reply_markup=InlineKeyboardMarkup([
+                    [InlineKeyboardButton(text='@{}'.format(profile), url='https://instagram.com/{}'.format(profile))]
+                ])
+            )
+
+        context.job_queue.run_once(notify_nonfollowers, due_time, context=chat_id, name=str(chat_id))
+
+
 def disable_notifications(update: Update, context: CallbackContext) -> None:
     chat_id = update.message.chat_id
     job_removed = remove_job_notify_if_exists(str(chat_id), context)
     text = 'Notificações cancelada!' if job_removed else 'Você não ativou as notificações!'
     update.message.reply_text(text)
+
+
+def remove_job_notify_if_exists(name: str, context: CallbackContext) -> bool:
+    current_jobs = context.job_queue.get_jobs_by_name(name)
+    if not current_jobs:
+        return False
+    for job in current_jobs:
+        job.schedule_removal()
+    return True
 
 
 def login(update: Update, context: CallbackContext) -> int:
@@ -165,7 +165,7 @@ def cancel(update: Update, context: CallbackContext) -> int:
 
 def main() -> None:
     # Create the Updater and pass it your bot's token.
-    updater = Updater("YOUR_TOKEN_BOT")
+    updater = Updater("5092523690:AAEbg_vnj_buFJkxr140dMQ4_RVc7NisBK8")
 
     # Get the dispatcher to register handlers
     dispatcher = updater.dispatcher
