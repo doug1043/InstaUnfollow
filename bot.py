@@ -80,6 +80,7 @@ def activate_notifications(update: Update, context: CallbackContext) -> None:
         context.job_queue.run_once(notify_nonfollowers, due_time, context=chat_id, name=str(chat_id))
         update.message.reply_text('Notificações ativadas!')
         update.message.reply_text('Irei notificar quando alguém deixar de seguir seu perfil :D')
+        update.message.reply_text('Use o comando /desativar para desativar as notificações')
 
 
 def notify_nonfollowers(context: CallbackContext) -> None:
@@ -152,8 +153,6 @@ def get_insta_password(update: Update, context: CallbackContext) -> int:
         update.message.reply_text('Erro de conexão, tente novamente usando o comando /login')
     except instaloader.exceptions.InvalidArgumentException:
         update.messsage.reply_text('Erro, caracteres invalidos!')
-
-    print(user_profiles)
 
     return ConversationHandler.END
 
