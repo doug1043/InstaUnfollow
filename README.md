@@ -15,15 +15,20 @@ pip install instaloader
 
 Insira o TOKEN do seu BOT criado via API de criação de BOTs [Telegram](https://core.telegram.org/bots/api)
 ```python
-#bot.py
+#config.py
 ...
 
-def main() -> None:
-    # Create the Updater and pass it your bot's token.
-    updater = Updater("YOUR_TOKEN")
+import instaloader
 
-    # Get the dispatcher to register handlers
-    dispatcher = updater.dispatcher
+BOT_TOKEN = "YOUR_BOT_TOKEN"
+
+USER, PASS = range(2)
+
+L = instaloader.Instaloader()
+
+user_profiles = {
+
+}
 
 ...
 ```
