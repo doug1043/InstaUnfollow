@@ -118,8 +118,12 @@ def remove_job_notify_if_exists(name: str, context: CallbackContext) -> bool:
 
 
 def login(update: Update, context: CallbackContext) -> int:
-    update.message.reply_text('Para continuar faça login com sua conta Instagram!')
-    update.message.reply_text('Usuário:')
+    chat_id = update.message.chat_id 
+    if len(user_profiles[chat_id]) < 4:
+        update.message.reply_text('Você ja está logado!')
+    else:
+        update.message.reply_text('Para continuar faça login com sua conta Instagram!')
+        update.message.reply_text('Usuário:')
 
     return USER
 
