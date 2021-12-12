@@ -16,7 +16,6 @@ pip install instaloader
 Insira o TOKEN do seu BOT criado via API de criação de BOTs [Telegram](https://core.telegram.org/bots/api)
 ```python
 #config.py
-...
 
 import instaloader
 
@@ -30,7 +29,6 @@ user_profiles = {
 
 }
 
-...
 ```
 
 ## Comandos do BOT
