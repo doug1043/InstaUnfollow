@@ -1,54 +1,12 @@
 #!/usr/bin/env python
 # pylint: disable=C0116,W0613
 
-import instaloader
-from telegram import Update, chat
+from telegram import Update
 from telegram.ext import Updater, CommandHandler, CallbackContext, MessageHandler, Filters, ConversationHandler
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
+from config import L, BOT_TOKEN, user_profiles, USER, PASS
+from instaunfollow import dont_followers, update_followers
 
-
-USER, PASS = range(2)
-
-L = instaloader.Instaloader()
-
-user_profiles = {
-
-}
-
-def dont_followers(chat_id):
-    profile_list_dont_followers = []
-    followers = []
-    following = []
-
-    for follower in user_profiles[chat_id].get('profile_data').get_followers():
-        followers.append(follower.username)
-
-    for followees in user_profiles[chat_id].get('profile_data').get_followees():
-        following.append(followees.username)
-
-    for profile in following:
-        if profile not in followers:
-            profile_list_dont_followers.append(profile)
-
-    return profile_list_dont_followers
-
-
-def update_followers(chat_id):
-    updated_dont_followers_base = []
-    new_nonfollowers_base = []
-
-    if user_profiles[chat_id].get('base') != None:
-        updated_dont_followers_base = dont_followers(chat_id)
-
-        for profile in updated_dont_followers_base:
-            if profile not in user_profiles[chat_id].get('base'):
-                new_nonfollowers_base.append(profile)
-
-        user_profiles[chat_id].update({'base' : updated_dont_followers_base})
-    else:
-        user_profiles[chat_id].update({'base' : dont_followers(chat_id)})
-
-    return new_nonfollowers_base
 
 
 def start(update: Update, context: CallbackContext) -> None:
@@ -66,8 +24,6 @@ def start(update: Update, context: CallbackContext) -> None:
             update.message.reply_text('Use /notificar para ativar avisos quando algum perfil deixar de te seguir')
             update.message.reply_text('Use /desativar para desativar avisos')
             update.message.reply_text('Use /sair para sair de sua conta e apagar os dados inseridos')
-
-    print(user_profiles)
 
 
 def seek_nonfollowers(update: Update, context: CallbackContext) -> None:
@@ -165,7 +121,6 @@ def get_insta_password(update: Update, context: CallbackContext) -> int:
     update.message.reply_text('Aguarde...')
     chat_id = update.message.chat_id
     user_profiles[chat_id].update({'senha' : str(update.message.text)}) 
-    print(user_profiles)
 
     try:
         L.login(user_profiles[chat_id].get('usuario'), user_profiles[chat_id].get('senha'))
@@ -173,7 +128,6 @@ def get_insta_password(update: Update, context: CallbackContext) -> int:
         update.message.reply_text('logado com sucesso!')
         update.message.reply_text('Use o comando /notificar para receber avisos quando alguém deixa de te seguir.')
         update.message.reply_text('Ou use o comando /buscar_nao_seguidores para ter a lista dos perfis que não te seguem de volta')
-        print(user_profiles)
     except instaloader.exceptions.BadCredentialsException:
         update.message.reply_text('Erro ao efetuar login!')
         update.message.reply_text('Usuário ou senha inválido')
@@ -200,7 +154,7 @@ def get_out(update: Update, context: CallbackContext) -> None:
 
 def main() -> None:
     # Create the Updater and pass it your bot's token.
-    updater = Updater("YOUR_TOKEN_BOT")
+    updater = Updater(BOT_TOKEN)
 
     # Get the dispatcher to register handlers
     dispatcher = updater.dispatcher
