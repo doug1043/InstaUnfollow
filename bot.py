@@ -57,19 +57,18 @@ def activate_notifications(update: Update, context: CallbackContext) -> None:
 def notify_nonfollowers(context: CallbackContext) -> None:
     due_time = 3600 #tempo em segundos
     chat_id = context.job
-    profile_unfollowed = update_followers(chat_id)
-
+    profile_unfollowed = update_followers(chat_id.context)
     if len(profile_unfollowed) == 0:
-        context.job_queue.run_once(notify_nonfollowers, due_time, context=chat_id, name=str(chat_id))
+        context.job_queue.run_once(notify_nonfollowers, due_time, context=chat_id.context, name=str(chat_id.context))
     else:
         for profile in profile_unfollowed:
-            context.bot.send_message(chat_id, text="Alguém deixou de te seguir!",
+            context.bot.send_message(chat_id.context, text="Alguém deixou de te seguir!",
                 reply_markup=InlineKeyboardMarkup([
                     [InlineKeyboardButton(text='@{}'.format(profile), url='https://instagram.com/{}'.format(profile))]
                 ])
             )
 
-        context.job_queue.run_once(notify_nonfollowers, due_time, context=chat_id, name=str(chat_id))
+        context.job_queue.run_once(notify_nonfollowers, due_time, context=chat_id.context, name=str(chat_id.context))
 
 
 def disable_notifications(update: Update, context: CallbackContext) -> None:
