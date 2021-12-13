@@ -40,6 +40,7 @@ def seek_nonfollowers(update: Update, context: CallbackContext) -> None:
                     [InlineKeyboardButton(text='@{}'.format(profile), url='https://instagram.com/{}'.format(profile))]
                     ])
                 )
+		update.message.reply_text('{} perfis não te seguem de volta'.format(len(profile_list)))
 
 
 def activate_notifications(update: Update, context: CallbackContext) -> None:
