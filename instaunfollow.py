@@ -27,11 +27,11 @@ def update_followers(chat_id):
         updated_dont_followers_base = dont_followers(chat_id)
 
         for profile in updated_dont_followers_base:
-            if profile not in user_profiles[chat_id].get('base'):
-                new_nonfollowers_base.append(profile)
+            if str(profile) not in user_profiles[chat_id].get('base'):
+                new_nonfollowers_base.append(str(profile))
 
-        user_profiles[chat_id].update({'base' : updated_dont_followers_base})
+        user_profiles[chat_id].update({'base' : str(updated_dont_followers_base)})
     else:
-        user_profiles[chat_id].update({'base' : dont_followers(chat_id)})
+        user_profiles[chat_id].update({'base' : str(dont_followers(chat_id))})
 
     return new_nonfollowers_base
