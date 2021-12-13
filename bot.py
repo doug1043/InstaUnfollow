@@ -149,6 +149,8 @@ def get_out(update: Update, context: CallbackContext) -> None:
     if chat_id in user_profiles:
         del user_profiles[chat_id]
         update.message.reply_text('Você saiu, para efetuar login novamente use /login')
+    else:
+        update.message.reply_text('Você não está logado.')
 
 
 def main() -> None:
