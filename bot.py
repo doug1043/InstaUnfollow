@@ -4,7 +4,7 @@
 from telegram import Update
 from telegram.ext import Updater, CommandHandler, CallbackContext, MessageHandler, Filters, ConversationHandler
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
-from config import L, BOT_TOKEN, user_profiles, USER, PASS
+from config import L, BOT_TOKEN, user_profiles, USER, PASS, instaloader
 from instaunfollow import dont_followers, update_followers
 
 
