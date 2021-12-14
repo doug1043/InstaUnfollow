@@ -31,6 +31,11 @@ user_profiles = {
 
 ```
 
+## Executando
+```bash
+python bot.py
+```
+
 ## Comandos do BOT
 [/start](#) --> Apresenta o BOT e informações sobre os principais comandos.
 
