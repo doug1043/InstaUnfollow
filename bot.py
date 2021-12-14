@@ -45,7 +45,7 @@ def seek_nonfollowers(update: Update, context: CallbackContext) -> None:
 
 def activate_notifications(update: Update, context: CallbackContext) -> None:
     chat_id = update.message.chat_id
-    due_time = 3600
+    due_time = 3600 #tempo em segundos. A cada 1 hora verifica se alguem deixou de seguir o perfil
     if user_profiles[chat_id].get('profile_data') == None:
         update.message.reply_text('Primeiro faça login pelo comando /login')
     else:
@@ -56,7 +56,7 @@ def activate_notifications(update: Update, context: CallbackContext) -> None:
 
 
 def notify_nonfollowers(context: CallbackContext) -> None:
-    due_time = 3600 #tempo em segundos
+    due_time = 3600 #tempo em segundos. A cada 1 hora verifica se alguem deixou de seguir o perfil
     chat_id = context.job
     profile_unfollowed = update_followers(chat_id.context)
     if len(profile_unfollowed) == 0:
